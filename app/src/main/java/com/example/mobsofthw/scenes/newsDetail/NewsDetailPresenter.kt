@@ -1,4 +1,4 @@
 package com.example.mobsofthw.scenes.newsDetail
 
-class NewsDetailPresenter: NewsDetailPresenterInput {
+class NewsDetailPresenter(override var activity: NewsDetailActivity) : NewsDetailPresenterInput {
 }
