@@ -1,5 +1,10 @@
 package com.example.mobsofthw.services
 
-interface NetworkServiceInput {
+import android.graphics.Bitmap
+import com.example.mobsofthw.models.News
+import java.net.URI
 
+interface NetworkServiceInput {
+    fun getNews(): List<News>
+    fun getImage(url: URI): Bitmap
 }
