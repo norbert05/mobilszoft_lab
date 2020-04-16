@@ -1,21 +1,16 @@
 package com.example.mobsofthw.scenes.newsDetail
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.example.mobsofthw.R
+import com.example.mobsofthw.scenes.base.BaseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NewsDetailActivity : AppCompatActivity() {
+class NewsDetailActivity : BaseActivity() {
 
-    lateinit var presenter: NewsDetailPresenterInput
+    private val viewModel: NewsDetailViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news_detail)
+    override fun getContentView() = R.layout.activity_news_detail
 
-        initializeProperties()
-    }
-
-    private fun initializeProperties() {
-        presenter = NewsDetailPresenter(this)
+    override fun initUi() {
     }
 }
+

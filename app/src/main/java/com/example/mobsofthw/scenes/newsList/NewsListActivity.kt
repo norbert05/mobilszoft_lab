@@ -1,21 +1,26 @@
 package com.example.mobsofthw.scenes.newsList
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.example.mobsofthw.R
+import com.example.mobsofthw.models.util.NetworkHelper.checkNetworkConnection
+import com.example.mobsofthw.scenes.base.BaseActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NewsListActivity : AppCompatActivity() {
+class NewsListActivity : BaseActivity() {
 
-    private lateinit var presenter: NewsListPresenterInput
+    private val viewModel: NewsListViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getContentView() = R.layout.activity_main
 
-        initializeProperties()
+    override fun initUi() {
+        fetchNews()
     }
 
-    private fun initializeProperties() {
-        presenter = NewsListPresenter(this)
+    private fun fetchNews() {
+        viewModel.uiData.observe(this, Observer { newsList ->
+            val newsList = newsList
+        })
+        if (!checkNetworkConnection(this)) return
+        viewModel.fetchNews()
     }
 }
