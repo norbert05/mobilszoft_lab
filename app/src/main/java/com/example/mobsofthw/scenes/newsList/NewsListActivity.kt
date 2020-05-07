@@ -1,9 +1,11 @@
 package com.example.mobsofthw.scenes.newsList
 
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobsofthw.R
 import com.example.mobsofthw.models.util.NetworkHelper.checkNetworkConnection
 import com.example.mobsofthw.scenes.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewsListActivity : BaseActivity() {
@@ -13,12 +15,14 @@ class NewsListActivity : BaseActivity() {
     override fun getContentView() = R.layout.activity_main
 
     override fun initUi() {
+        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+
         fetchNews()
     }
 
     private fun fetchNews() {
         viewModel.uiData.observe(this, Observer { newsList ->
-            val newsList = newsList
+            recyclerView.adapter = NewsListAdapter(newsList)
         })
         if (!checkNetworkConnection(this)) return
         viewModel.fetchNews()
