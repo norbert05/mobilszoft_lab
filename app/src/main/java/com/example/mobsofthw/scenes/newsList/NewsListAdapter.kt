@@ -2,6 +2,7 @@ package com.example.mobsofthw.scenes.newsList
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobsofthw.R
 import com.example.mobsofthw.models.dao.NewsEntity
 import com.example.mobsofthw.scenes.newsDetail.NewsDetailActivity
+import com.squareup.picasso.Picasso
 
 class NewsViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)) {
     private var titleTextView: TextView? = null
@@ -32,8 +34,10 @@ class NewsViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerView
         titleTextView!!.text = news.title
         descriptionTextView!!.text = news.description
         dateTextView!!.text = news.published
-    }
 
+        Picasso.get().load(news.image).into(imageView)
+        println(news.image)
+    }
 }
 
 class NewsListAdapter(private val list: List<NewsEntity>, private val context: Context): RecyclerView.Adapter<NewsViewHolder>() {
