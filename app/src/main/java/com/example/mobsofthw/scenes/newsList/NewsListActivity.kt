@@ -22,7 +22,7 @@ class NewsListActivity : BaseActivity() {
 
     private fun fetchNews() {
         viewModel.uiData.observe(this, Observer { newsList ->
-            recyclerView.adapter = NewsListAdapter(newsList)
+            recyclerView.adapter = NewsListAdapter(newsList, applicationContext)
         })
         if (!checkNetworkConnection(this)) return
         viewModel.fetchNews()

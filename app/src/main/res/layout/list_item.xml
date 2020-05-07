@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="4"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    android:id="@+id/linearLayout">
 
     <ImageView
         android:background="@color/cardview_dark_background"
