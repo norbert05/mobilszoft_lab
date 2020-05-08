@@ -1,5 +1,6 @@
 package com.example.mobsofthw.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.mobsofthw.models.dao.NewsEntity
 import com.example.mobsofthw.models.util.NetworkResponse
@@ -13,7 +14,7 @@ interface NewsRepository {
     val newsLiveData: LiveData<List<NewsEntity>>
 }
 
-class NewsRepositoryImpl(
+open class NewsRepositoryImpl(
     private val newsDto: NewsDto,
     private val newsDao: NewsDao
 ) : NewsRepository {
@@ -36,10 +37,14 @@ class NewsRepositoryImpl(
                         url = it.url
                     )
                 }
-                newsEntityList?.let {
-                    newsDao.insertAll(it)
-                }
+                persistNews(newsEntityList)
             }
+        }
+    }
+
+    suspend fun persistNews(newsEntityList: List<NewsEntity>?) {
+        newsEntityList?.let {
+            newsDao.insertAll(it)
         }
     }
 }
